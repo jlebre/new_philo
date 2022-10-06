@@ -24,10 +24,12 @@
 # define INT_MAX    2147483647
 # define INT_MIN    -2147483648
 
+/*
 typedef struct s_philo
 {
 	int	nb;
 }	t_philo;
+*/
 
 typedef struct s_args
 {
@@ -36,7 +38,7 @@ typedef struct s_args
 	long long	time_to_eat;
 	long long	time_to_sleep;
 	int			number_of_meals;
-	t_philo		*philo;
+	//t_philo		*philo;
 }   t_args;
 
 //CHECK
@@ -44,10 +46,18 @@ void    	check(char **argv);
 void    	check_all_int(char **argv);
 void    	check_limits(char **argv);
 
+//START ARGS
+void		start_args(int argc, char **argv, t_args *args);
+
 //UTILS
-void    	ft_error();
+void    	ft_error(char	*str);
 int			ft_isdigit(int i);
 int			ft_atoi(const char *str);
-long long	ft_atol(const char *str)
+long long	ft_atol(const char *str);
+
+//COLORS
+int			red(char *str);
+int			green(char *str);
+int			yellow(char *str);
 
 #endif

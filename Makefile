@@ -12,21 +12,20 @@
 
 CC = gcc
 RM = @rm -rf
-FLAGS = -Wall -Werror -Wextra -pthread
-#-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c
+SRC = main.c check.c start_args.c colors.c utils.c
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME) clear
+all: $(NAME)
 
 $(NAME): $(OBJ) $(INCLUDE)
-	@$(CC) $(OBJ) $(FLAGS) -0 $(NAME)
+	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
 	@echo "\033[0;32mPhilo Compiled!\033[0m"
 
 .c.o:

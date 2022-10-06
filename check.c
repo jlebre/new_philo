@@ -29,7 +29,7 @@ void    check_all_int(char **argv)
 		while (input[i][j])
 		{
 			if (!ft_isdigit(input[i][j]))
-				ft_error();
+				ft_error("All parameters should be numeric!\n");
 			j++;
 		}
 		i++;
@@ -46,7 +46,7 @@ void    check_limits(char **argv)
 	{
 		n = ft_atol(argv[i]);
 		if (n < INT_MIN || n > INT_MAX)
-			ft_error();
+			ft_error("At least one parameters is either too big or too small!\n");
 		i++;
 	}
 }
@@ -54,5 +54,5 @@ void    check_limits(char **argv)
 void    check(char **argv)
 {
 	check_all_int(argv);
-	check_limits(argv)
+	check_limits(argv);
 }

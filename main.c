@@ -20,5 +20,6 @@ int main(int argc, char **argv)
 		return (0);
 	check(argv);
 	start_args(argc, argv, &args);
+	green("Ready!\n");
 	return (0);
 }
