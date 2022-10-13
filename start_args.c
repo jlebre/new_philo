@@ -31,5 +31,5 @@ void	start_args(int argc, char **argv, t_args *args)
 	}
 	else
 		args->number_of_meals = 0;
-	//args->start_time = time_ms();
+	gettimeofday(&args->start_time, NULL);
 }

@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 16:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/01 16:50:06 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/11 18:00:28 by marvin            #+#    #+#             */
+/*   Updated: 2022/10/11 18:00:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+void    *routine(void *i)
 {
-	t_args  args;
+	t_args args;
 
-	if (argc < 2)
-		ft_error("No Arguments!\n");
-	check(argv);
-	start_args(argc, argv, &args);
-	create_philo(&args);
-	//while (died(&args) != 0)
-	destroy_philo(&args);
-	green("Ready!\n");
+	pthread_mutex_lock(&args.eat);
+	printf("%lli Eat, Sleep, Think %p\n", current_time(&args), i);
+	pthread_mutex_unlock(&args.eat);
+	//sleep(1);
 	return (0);
 }
