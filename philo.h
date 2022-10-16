@@ -60,7 +60,8 @@ void    			destroy_philo(t_args *args);
 void				*routine(void *arg);
 
 //TIME
-long long			get_time();
+long long			get_time(t_args *args);
+//long long			get_time();
 long long  			current_time(t_args *args);
 
 //UTILS

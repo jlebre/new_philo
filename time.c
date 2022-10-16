@@ -12,7 +12,6 @@
 
 #include "philo.h"
 
-/*
 long long get_time(t_args *args)
 {
 	struct timeval	tv;
@@ -24,8 +23,7 @@ long long get_time(t_args *args)
 	usec = tv.tv_usec - args->start_time.tv_usec;
 	return ((usec / 1000) + (sec * 1000));
 }
-*/
-
+/*
 long long	get_time(void)
 {
 	struct timeval	time;
@@ -33,8 +31,10 @@ long long	get_time(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * (long long)1000) + (time.tv_usec / 1000));
 }
-
+*/
 long long	current_time(t_args *args)
 {
-	return (get_time() - args->llstart_time);
+	//printf("GT: %lld\n", get_time(args));
+	//printf("ST: %lld\n", args->llstart_time);
+	return (get_time(args) - args->llstart_time);
 }

@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	check(argv);
 	start_args(argc, argv, &args);
 	create_philo(&args);
+	//sleep(10);
 	destroy_philo(&args);
 	green("Ready!\n");
 	return (0);

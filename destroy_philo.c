@@ -20,7 +20,7 @@ void    destroy_philo(t_args *args)
     while (i < args->number_of_philosophers)
     {
         pthread_mutex_destroy(&args->philo[i].fork);
-        printf("Mutex Destroy Fork %i\n", (i + 1));
+        printf("%lld Mutex Destroy Fork %i\n",current_time(args), (i + 1));
         i++;
     }
 

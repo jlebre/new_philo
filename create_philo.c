@@ -23,15 +23,15 @@ void    create_philo(t_args *args)
 	while (i < args->number_of_philosophers)
 	{
 		pthread_mutex_init(&args->philo[i].fork, NULL);
-		printf("Mutex Init Fork %i\n", (i + 1));
+		printf("%lld Mutex Init Fork %i\n", current_time(args), (i + 1));
 		i++;
 	}
 	i = 0;
 	while (i < args->number_of_philosophers)
 	{
 		args->philo[i].id = i;
-		pthread_create(&args->philo[i].philo, NULL, &routine, &args->philo[i]);
-		printf("%i created!\n", (i + 1));
+		pthread_create(&args->philo[i].philo, NULL, &routine, &args);
+		printf("%lld %i created!\n",current_time(args), (i + 1));
 		i++;
 	}
 }

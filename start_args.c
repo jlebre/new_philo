@@ -31,6 +31,5 @@ void	start_args(int argc, char **argv, t_args *args)
 	}
 	else
 		args->number_of_meals = 0;
-    pthread_mutex_init(&args->routine, NULL);
 	args->llstart_time = get_time(args);
 }

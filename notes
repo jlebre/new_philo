@@ -28,5 +28,6 @@ https://www.thegeekstuff.com/2012/03/linux-threads-intro/
 https://iq.opengenus.org/linux-thread-creation-data-passing-waiting/#:~:text=Linux%20threads%3A%20Creation%2C%20Data%20passing%2C%20Waiting%201%20Introduction.,Attributes.%20...%206%20Summary.%20...%207%20References.%20
 MUTEX
 https://www.delftstack.com/howto/c/mutex-in-c/
+https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
 GETTIMEOFDAY
 https://linuxhint.com/gettimeofday_c_language/
