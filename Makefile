@@ -12,8 +12,7 @@
 
 CC = gcc
 RM = @rm -rf
-FLAGS = -Wall -Werror -Wextra -pthread
-#-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address
 
 NAME = philo
 

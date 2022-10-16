@@ -14,26 +14,25 @@
 
 void    create_philo(t_args *args)
 {
-    int i;
+	int i;
 
-    i = 1;
-    args->philo = malloc(sizeof(t_philo) * args->number_of_philosophers);
-    if (!args->philo)
-        return ;
-    while (i < args->number_of_philosophers + 1)
-    {
-        pthread_mutex_init(&args->philo[i].fork, NULL);
-        printf("Mutex Init Fork %i\n", i);
-        i++;
-    }
-    i = 1;
-    while (i < args->number_of_philosophers + 1)
-    {
-        args->philo[i].id = i;
-        pthread_create(&args->philo[i].philo, NULL, &routine, &args->philo[i]);
-        printf("%i created!\n", i);
-        //usleep(1000);
-        i++;
-    }
-    pthread_mutex_init(&args->eat, NULL);
+	i = 0;
+	args->philo = malloc(sizeof(t_philo) * args->number_of_philosophers);
+	if (!args->philo)
+		return ;
+	while (i < args->number_of_philosophers)
+	{
+		pthread_mutex_init(&args->philo[i].fork, NULL);
+		printf("Mutex Init Fork %i\n", (i + 1));
+		i++;
+	}
+	i = 0;
+	while (i < args->number_of_philosophers)
+	{
+		args->philo[i].id = i;
+		pthread_create(&args->philo[i].philo, NULL, &routine, &args->philo[i]);
+		printf("%i created!\n", (i + 1));
+		i++;
+	}
 }
+//usleep(1000);

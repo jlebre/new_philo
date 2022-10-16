@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <time.h>
+//# include <time.h>
 # include <sys/time.h> 
 # include <pthread.h>
 
@@ -37,8 +37,9 @@ typedef struct s_args
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
+	long long		llstart_time;
 	struct timeval	start_time;
-	pthread_mutex_t eat;
+	pthread_mutex_t routine;
 	int				number_of_meals;
 	t_philo			*philo;
 }   t_args;
@@ -59,6 +60,7 @@ void    			destroy_philo(t_args *args);
 void				*routine(void *arg);
 
 //TIME
+long long			get_time();
 long long  			current_time(t_args *args);
 
 //UTILS

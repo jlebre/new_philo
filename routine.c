@@ -16,9 +16,13 @@ void    *routine(void *i)
 {
 	t_args args;
 
-	pthread_mutex_lock(&args.eat);
-	printf("%lli Eat, Sleep, Think %p\n", current_time(&args), i);
-	pthread_mutex_unlock(&args.eat);
-	//sleep(1);
+	pthread_mutex_lock(&args.routine);
+	printf("%lld Eat, Sleep, Think %p\n", current_time(&args), i);
+	usleep(100000);
+	printf("START_TIME: %lld\n", args.llstart_time);
+	printf("CURRENT_TIME: %lld\n", get_time(&args));
+	printf("DIF_TIME: %lld\n", current_time(&args));
+	usleep(100000);
+	pthread_mutex_unlock(&args.routine);
 	return (0);
 }

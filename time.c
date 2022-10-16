@@ -12,11 +12,29 @@
 
 #include "philo.h"
 
-long long    current_time(t_args *args)
+/*
+long long get_time(t_args *args)
 {
-	struct timeval  current_time;
+	struct timeval	tv;
+	long long		sec;
+	long long		usec;
 
-	gettimeofday(&current_time, NULL);
-	return (((current_time.tv_sec - args->start_time.tv_sec) * 1000)
-		+ ((current_time.tv_usec - args->start_time.tv_usec) / 1000));
+	gettimeofday(&tv, NULL);
+	sec = tv.tv_sec - args->start_time.tv_sec;
+	usec = tv.tv_usec - args->start_time.tv_usec;
+	return ((usec / 1000) + (sec * 1000));
+}
+*/
+
+long long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * (long long)1000) + (time.tv_usec / 1000));
+}
+
+long long	current_time(t_args *args)
+{
+	return (get_time() - args->llstart_time);
 }
