@@ -29,8 +29,9 @@ typedef struct s_philo
 	int 			id;
 	int				meals;
 	long long		last_meal;
-	pthread_mutex_t fork;
-	pthread_mutex_t routine;
+	pthread_mutex_t fork[250];
+	pthread_mutex_t died;
+	pthread_mutex_t print;
 	pthread_t		philo;
 	struct s_args	*args;
 }	t_philo;
@@ -50,10 +51,12 @@ typedef struct s_args
 void    			check(char **argv);
 void    			check_all_int(char **argv);
 void    			check_limits(char **argv);
+int					check_if_dead(t_philo *philo);
 
 //START ARGS
 void				start_args(int argc, char **argv, t_args *args);
 t_philo     		*start_philo(t_args  *args);
+void				start_mutex(t_philo *philo);
 
 //PHILO
 void    			create_philo(t_args *args);
@@ -61,6 +64,8 @@ int	    			destroy_philo(t_philo *philo, t_args *args);
 
 //ROUTINE
 void				*routine(void *arg);
+int					eat(t_philo *philo);
+int					nap(t_philo *philo);
 
 //TIME
 long long			get_time();

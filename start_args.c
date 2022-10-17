@@ -51,7 +51,19 @@ t_philo     *start_philo(t_args  *args)
         philo[i].args = args;
 		i++;
 	}
+	start_mutex(philo);
     return (philo);
 }
 
-//START FORK MUTEX
+void	start_mutex(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while(i < philo->args->number_of_philosophers)
+	{
+		pthread_mutex_init(&philo->fork[i], NULL);
+		i++;
+	}
+	pthread_mutex_init(&philo->print, NULL);
+}

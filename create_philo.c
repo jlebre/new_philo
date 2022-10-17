@@ -26,4 +26,3 @@ void    create_philo(t_args *args)
 	}
 	destroy_philo(philo, args);
 }
-//usleep(1000);

@@ -56,3 +56,13 @@ void    check(char **argv)
 	check_all_int(argv);
 	check_limits(argv);
 }
+
+int	check_if_dead(t_philo *philo)
+{
+	if (current_time(philo->args) - philo->last_meal > philo->args->time_to_die)
+	{
+		printf("%lld %i died\n", current_time(philo->args), philo->id);
+		ft_error("DIED");
+	}
+	return (0);
+} 

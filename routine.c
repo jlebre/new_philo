@@ -17,12 +17,35 @@ void    *routine(void *i)
 	t_philo *philo;
 
 	philo = (t_philo *)i;
-	pthread_mutex_init(&philo->routine, NULL);
-	pthread_mutex_lock(&philo->routine);
-	red("Locked\n");
-	printf("%lli Eat, Sleep, Think\n", current_time(philo->args));
-	green("Unlocked\n");
-	pthread_mutex_unlock(&philo->routine);
+	while (1)
+	{
+		check_if_dead(philo);
+		if (eat(philo))
+			break ;
+		if (nap(philo))
+			break;
+	}
 	return (NULL);
+}
+
+int	eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->print);
+	printf("%lld %i is eating\n", current_time(philo->args), philo->id);
+	pthread_mutex_unlock(&philo->print);
+	usleep(philo->args->time_to_eat * 1000);
+	return (0);
+}
+
+int	nap(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->print);
+	printf("%lld %i is sleeping\n", current_time(philo->args), philo->id);
+	pthread_mutex_unlock(&philo->print);
+	usleep(philo->args->time_to_sleep * 1000);
+	pthread_mutex_lock(&philo->print);
+	printf("%lld %i is thinking\n", current_time(philo->args), philo->id);
+	pthread_mutex_unlock(&philo->print);
+	return (0);
 }
 

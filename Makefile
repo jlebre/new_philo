@@ -12,8 +12,7 @@
 
 CC = gcc
 RM = @rm -rf
-FLAGS = -Wall -Werror -Wextra -pthread
-#-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=address
 
 NAME = philo
 
@@ -26,9 +25,18 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(INCLUDE)
+$(NAME): $(OBJ) $(INCLUDE) #Header
 	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
 	@echo "\033[0;32mPhilo Compiled!\033[0m"
+ 
+Header:
+	@echo "██████╗ ██╗  ██╗██╗██╗      ██████╗ "
+	@echo "██╔══██╗██║  ██║██║██║     ██╔═══██╗"
+	@echo "██████╔╝███████║██║██║     ██║   ██║"
+	@echo "██╔═══╝ ██╔══██║██║██║     ██║   ██║"
+	@echo "██║     ██║  ██║██║███████╗╚██████╔╝"
+	@echo "╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ "
+
 
 .c.o:
 	@$(CC) $(FLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
@@ -44,3 +52,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+                                                                                            

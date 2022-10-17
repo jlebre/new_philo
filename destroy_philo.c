@@ -22,14 +22,13 @@ int    destroy_philo(t_philo *philo, t_args *args)
 		pthread_join(philo[i].philo, NULL);
 		i++;
 	}
-	/*
 	i = 0;
 	while (i < philo->args->number_of_philosophers)
 	{
-		pthread_mutex_destroy(&philo[i].fork);
+		pthread_mutex_destroy(&philo->fork[i]);
 		i++;
 	}
-	*/
+	pthread_mutex_destroy(&philo->print);
 	free(philo);
 	return (0);
 }
