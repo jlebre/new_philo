@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 18:00:28 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/11 18:00:28 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:18:53 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:18:53 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 
 void    *routine(void *i)
 {
-	t_args *args;
+	t_philo *philo;
 
-	args = i;
-	printf("START_TIME: %lld\n", args->llstart_time);
-	printf("START_TIME: %lld\n", args->time_to_die);
-	printf("START_TIME: %lld\n", args->time_to_eat);
-	printf("START_TIME: %lld\n", args->time_to_sleep);
-	printf("START_TIME: %i\n", args->number_of_philosophers);
-	pthread_mutex_init(&args->routine, NULL);
-	pthread_mutex_lock(&args->routine);
+	philo = (t_philo *)i;
+	pthread_mutex_init(&philo->routine, NULL);
+	pthread_mutex_lock(&philo->routine);
 	red("Locked\n");
-	printf("%lld Eat, Sleep, Think\n", current_time(args));
-	printf("START_TIME: %lld\n", args->llstart_time);
+	printf("%lli Eat, Sleep, Think\n", current_time(philo->args));
 	green("Unlocked\n");
-	pthread_mutex_unlock(&args->routine);
-	return (0);
+	pthread_mutex_unlock(&philo->routine);
+	return (NULL);
 }
 
-/*
-	printf("CURRENT_TIME: %lld\n", get_time(args));
-	printf("DIF_TIME: %lld\n", current_time(args));
-	*/

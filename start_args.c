@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 17:40:39 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/06 17:40:39 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:33:46 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:33:46 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,27 @@ void	start_args(int argc, char **argv, t_args *args)
 	}
 	else
 		args->number_of_meals = 0;
-	args->llstart_time = get_time(args);
+	args->start_time = get_time();
 }
+
+t_philo     *start_philo(t_args  *args)
+{
+    int     i;
+    t_philo *philo;
+
+	i = 0;
+	philo = malloc(sizeof(t_philo) * args->number_of_philosophers);
+	if (!philo)
+		return (0);
+    while (i < args->number_of_philosophers)
+	{
+		philo[i].id = i + 1;
+        philo[i].meals = 0;
+        philo[i].last_meal = args->start_time;
+        philo[i].args = args;
+		i++;
+	}
+    return (philo);
+}
+
+//START FORK MUTEX

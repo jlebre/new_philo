@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 16:48:34 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/01 16:48:34 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:33:32 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:33:32 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@
 typedef struct s_philo
 {
 	int 			id;
+	int				meals;
+	long long		last_meal;
 	pthread_mutex_t fork;
+	pthread_mutex_t routine;
 	pthread_t		philo;
+	struct s_args	*args;
 }	t_philo;
 
 typedef struct s_args
 {
+	int				died;
 	int				number_of_philosophers;
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
-	long long		llstart_time;
-	struct timeval	start_time;
-	pthread_mutex_t routine;
+	long long		start_time;
 	int				number_of_meals;
-	t_philo			*philo;
 }   t_args;
 
 //CHECK
@@ -51,17 +53,17 @@ void    			check_limits(char **argv);
 
 //START ARGS
 void				start_args(int argc, char **argv, t_args *args);
+t_philo     		*start_philo(t_args  *args);
 
 //PHILO
 void    			create_philo(t_args *args);
-void    			destroy_philo(t_args *args);
+int	    			destroy_philo(t_philo *philo, t_args *args);
 
 //ROUTINE
 void				*routine(void *arg);
 
 //TIME
-long long			get_time(t_args *args);
-//long long			get_time();
+long long			get_time();
 long long  			current_time(t_args *args);
 
 //UTILS
