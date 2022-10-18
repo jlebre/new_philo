@@ -30,5 +30,6 @@ int    destroy_philo(t_philo *philo, t_args *args)
 	}
 	pthread_mutex_destroy(&philo->print);
 	free(philo);
+	exit(0);
 	return (0);
 }

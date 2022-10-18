@@ -19,22 +19,36 @@ void    *routine(void *i)
 	philo = (t_philo *)i;
 	while (1)
 	{
-		check_if_dead(philo);
-		if (eat(philo))
-			break ;
-		if (nap(philo))
-			break;
+		if (check_if_dead(philo))
+			if (eat(philo))
+				break ;
+		if (check_if_dead(philo))
+			if (nap(philo))
+				break;
 	}
 	return (NULL);
 }
 
 int	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->print);
-	printf("%lld %i is eating\n", current_time(philo->args), philo->id);
-	pthread_mutex_unlock(&philo->print);
-	usleep(philo->args->time_to_eat * 1000);
-	return (0);
+	if (check_if_dead(philo))
+	{
+		if (check_fork(philo))
+		{
+			pthread_mutex_lock(&philo->print);
+			printf("%lld %i is eating\n", current_time(philo->args), philo->id);
+			pthread_mutex_unlock(&philo->print);
+			philo->last_meal = current_time(philo->args);
+			usleep(philo->args->time_to_eat * 1000);
+			pthread_mutex_unlock(&philo->fork[philo->id]);
+			if (philo->id == philo->args->number_of_philosophers)
+				pthread_mutex_unlock(&philo->fork[0]);
+			else
+				pthread_mutex_unlock(&philo->fork[philo->id + 1]);
+		}
+		return (0);
+	}
+	return (1);
 }
 
 int	nap(t_philo *philo)

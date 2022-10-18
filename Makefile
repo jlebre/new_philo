@@ -12,32 +12,30 @@
 
 CC = gcc
 RM = @rm -rf
-FLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread
+#-g -fsanitize=address
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c start_args.c create_philo.c \
-	destroy_philo.c routine.c colors.c utils.c time.c
+SRC = main.c check.c start_args.c create_philo.c check_if_dead.c\
+	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c 
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(INCLUDE) #Header
+$(NAME): $(OBJ) $(INCLUDE)
 	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
-	@echo "\033[0;32mPhilo Compiled!\033[0m"
- 
-Header:
 	@echo "██████╗ ██╗  ██╗██╗██╗      ██████╗ "
 	@echo "██╔══██╗██║  ██║██║██║     ██╔═══██╗"
 	@echo "██████╔╝███████║██║██║     ██║   ██║"
 	@echo "██╔═══╝ ██╔══██║██║██║     ██║   ██║"
 	@echo "██║     ██║  ██║██║███████╗╚██████╔╝"
 	@echo "╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ "
-
-
+	@echo "\033[0;32mPhilo Compiled!\033[0m"
+ 
 .c.o:
 	@$(CC) $(FLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
 
@@ -52,5 +50,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-                                                                                            

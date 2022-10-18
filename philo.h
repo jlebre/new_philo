@@ -52,6 +52,7 @@ void    			check(char **argv);
 void    			check_all_int(char **argv);
 void    			check_limits(char **argv);
 int					check_if_dead(t_philo *philo);
+int    				check_fork(t_philo *philo);
 
 //START ARGS
 void				start_args(int argc, char **argv, t_args *args);
