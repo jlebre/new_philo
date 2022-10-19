@@ -12,14 +12,13 @@
 
 CC = gcc
 RM = @rm -rf
-FLAGS = -Wall -Werror -Wextra -pthread
-#-g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c start_args.c create_philo.c check_if_dead.c\
+SRC = main.c check.c start_args.c create_philo.c check_if_dead.c print.c \
 	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c 
 
 OBJ = $(SRC:.c=.o)

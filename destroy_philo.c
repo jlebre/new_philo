@@ -25,11 +25,12 @@ int    destroy_philo(t_philo *philo, t_args *args)
 	i = 0;
 	while (i < philo->args->number_of_philosophers)
 	{
-		pthread_mutex_destroy(&philo->fork[i]);
+		pthread_mutex_destroy(&philo->args->fork[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&philo->print);
+	pthread_mutex_destroy(&philo->args->print);
+	pthread_mutex_destroy(&philo->args->eat);
+	pthread_mutex_destroy(&philo->args->died);
 	free(philo);
-	exit(0);
 	return (0);
 }

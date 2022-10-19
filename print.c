@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_dead.c                                    :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/19 18:27:01 by jlebre           ###   ########.fr       */
+/*   Created: 2022/10/19 15:28:12 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/19 18:15:09 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_if_dead(t_philo *philo)
+int    print(t_philo *philo, char *str)
 {
-	if ((get_time() - philo->last_meal) > philo->args->time_to_die)
-	{
-		pthread_mutex_lock(&philo->args->died);
-		philo->args->died = 1;
-		printf("%lld %i died\n", current_time(philo->args), philo->id);
-		pthread_mutex_unlock(&philo->args->died);
-		return (0);
-	}
-	//pthread_mutex_unlock(&philo->died);
-	return (1);
+    //pthread_mutex_lock(&philo->print);
+    if (!check_if_dead(philo) || philo->meals == philo->args->number_of_meals)
+        return (0);
+    printf("%lld %i %s\n", current_time(philo->args), philo->id, str);
+   // pthread_mutex_unlock(&philo->print);
+    return (1);
 }
