@@ -23,6 +23,11 @@ void	start_args(int argc, char **argv, t_args *args)
     if (args->number_of_philosophers <= 0 || args->time_to_die < 0
         || args->time_to_eat < 0 || args->time_to_sleep < 0)
 		ft_error("Invalid values!\n");
+	if (args->number_of_philosophers > 200)
+	{
+		ft_error("You can only test with a maximum of 200 philosophers!\n");
+		ft_error("Read the evaluation guide\n");
+	}
     if (argc == 6)
 	{
 		args->number_of_meals = ft_atoi(argv[4]);
@@ -33,6 +38,7 @@ void	start_args(int argc, char **argv, t_args *args)
 		args->number_of_meals = -1;
 	args->start_time = get_time();
 	args->died = 0;
+	args->lock = 0;
 }
 
 t_philo     *start_philo(t_args  *args)
@@ -69,5 +75,6 @@ void	start_mutex(t_philo *philo)
 	}
 	pthread_mutex_init(&philo->args->print, NULL);
 	pthread_mutex_init(&philo->args->eat, NULL);
-	pthread_mutex_init(&philo->args->died, NULL);
+	pthread_mutex_init(&philo->args->mut_died, NULL);
+	pthread_mutex_init(&philo->args->check_print, NULL);
 }

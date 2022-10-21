@@ -29,30 +29,38 @@ void    *routine(void *i)
 
 int	eat(t_philo *philo)
 {
-	while (check_fork(philo) == 0)
+	while (!check_fork(philo))
 	{
-		check_fork(philo);
-	}
-		pthread_mutex_lock(&philo->args->eat);
-		pthread_mutex_lock(&philo->args->print);
-		if (!print(philo, "is eating"))
+		if (check_fork(philo) == 2)
 			return (0);
-		pthread_mutex_unlock(&philo->args->print);
-		while (philo->args->time_to_eat > (get_time() - philo->last_meal))
+	}
+	pthread_mutex_lock(&philo->args->eat);
+	pthread_mutex_lock(&philo->args->print);
+	if (!print(philo, "is eating"))
+		return (0);
+	pthread_mutex_unlock(&philo->args->print);
+	while (philo->args->time_to_eat > (get_time() - philo->last_meal))
+	{
+		pthread_mutex_lock(&philo->args->mut_died);
+		if (philo->args->died)
 		{
-			if (philo->args->died)
-				break ;
+			pthread_mutex_unlock(&philo->args->mut_died);
+			break ;
 		}
-		philo->last_meal = current_time(philo->args);
-		philo->meals++;
-		pthread_mutex_unlock(&philo->args->eat);
-		pthread_mutex_unlock(&philo->args->fork[philo->id]);
+			pthread_mutex_unlock(&philo->args->mut_died);
+	}
+	philo->last_meal = get_time();
+	philo->meals++;
+	if (philo->args->number_of_philosophers > 1)
+	{
 		if (philo->id == philo->args->number_of_philosophers)
 			pthread_mutex_unlock(&philo->args->fork[0]);
 		else
 			pthread_mutex_unlock(&philo->args->fork[philo->id + 1]);
-		return (1);
-	return (0);
+		pthread_mutex_unlock(&philo->args->fork[philo->id]);
+	}
+	pthread_mutex_unlock(&philo->args->eat);
+	return (1);
 }
 
 int	nap(t_philo *philo)
@@ -63,8 +71,13 @@ int	nap(t_philo *philo)
 	pthread_mutex_unlock(&philo->args->print);
 	while (philo->args->time_to_sleep > (get_time() - philo->last_nap))
 	{
+		pthread_mutex_lock(&philo->args->mut_died);
 		if (philo->args->died)
-				break ;
+		{
+			pthread_mutex_unlock(&philo->args->mut_died);
+			break ;
+		}
+			pthread_mutex_unlock(&philo->args->mut_died);
 	}
 	philo->last_nap = current_time(philo->args);
 	pthread_mutex_lock(&philo->args->print);

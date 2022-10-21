@@ -37,13 +37,15 @@ typedef struct s_philo
 typedef struct s_args
 {
 	int				died;
+	int				lock;
 	int				number_of_philosophers;
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
 	long long		start_time;
-	pthread_mutex_t fork[250];
-	pthread_mutex_t died;
+	pthread_mutex_t fork[200];
+	pthread_mutex_t mut_died;
+	pthread_mutex_t check_print;
 	pthread_mutex_t print;
 	pthread_mutex_t eat;
 	int				number_of_meals;
