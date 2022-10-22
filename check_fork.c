@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_fork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:20:30 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 20:42:12 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:17:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	check_fork_2(t_philo *philo)
 	if (!print(philo, "has taken a fork"))
 	{
 		pthread_mutex_unlock(&philo->right_fork);
-		return (0);
 	}
 	pthread_mutex_lock(philo->left_fork);
 	if (!print(philo, "has taken a fork"))

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/22 15:55:26 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:03:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	check_if_dead(t_philo *philo)
 			i++;
 		}
 		pthread_mutex_unlock(&philo->args->mutex);
+		usleep(1960);
 	}
 }
 
