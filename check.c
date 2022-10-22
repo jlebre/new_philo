@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void    check_all_int(char **argv)
+void	check_all_int(char **argv)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ void    check_all_int(char **argv)
 	}
 }
 
-void    check_limits(char **argv)
+void	check_limits(char **argv)
 {
 	int			i;
 	long long	n;
@@ -46,12 +46,12 @@ void    check_limits(char **argv)
 	{
 		n = ft_atol(argv[i]);
 		if (n < INT_MIN || n > INT_MAX)
-			ft_error("At least one parameters is either too big or too small!\n");
+			ft_error("At least one parameters is off limits!\n");
 		i++;
 	}
 }
 
-void    check(char **argv)
+void	check(char **argv)
 {
 	check_all_int(argv);
 	check_limits(argv);

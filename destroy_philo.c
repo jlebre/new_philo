@@ -12,26 +12,32 @@
 
 #include "philo.h"
 
-int    destroy_philo(t_philo *philo, t_args *args)
+void	destroy_philo(t_philo *philo)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while (i < args->number_of_philosophers)
-	{
-		pthread_join(philo[i].philo, NULL);
-		i++;
-	}
 	i = 0;
 	while (i < philo->args->number_of_philosophers)
 	{
-		pthread_mutex_destroy(&philo->args->fork[i]);
+		if (pthread_join(philo[i].philo, NULL))
+			ft_error("Failed to join threads!\n");
 		i++;
 	}
-	pthread_mutex_destroy(&philo->args->print);
-	pthread_mutex_destroy(&philo->args->eat);
-	pthread_mutex_destroy(&philo->args->mut_died);
-	pthread_mutex_destroy(&philo->args->check_print);
+	kill_everything(philo);
+}
+
+void	kill_everything(t_philo *philo)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = philo->args->number_of_philosophers;
+	while (i < nb)
+	{
+		pthread_mutex_destroy(&philo[i].right_fork);
+		i++;
+	}
+	pthread_mutex_destroy(&philo->args->mutex);
 	free(philo);
-	exit (0);
 }

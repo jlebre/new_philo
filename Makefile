@@ -19,7 +19,7 @@ NAME = philo
 INCLUDE = .
 
 SRC = main.c check.c start_args.c create_philo.c check_if_dead.c print.c \
-	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c 
+	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c eat.c
 
 OBJ = $(SRC:.c=.o)
 

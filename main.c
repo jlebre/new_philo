@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_args  args;
+	t_args	args;
 
 	if (argc < 2)
 		ft_error("No Arguments!\n");

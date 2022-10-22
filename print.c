@@ -6,24 +6,36 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:28:12 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/20 22:45:18 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/22 15:52:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int    print(t_philo *philo, char *str)
+int	print(t_philo *philo, char *str)
 {
-	if (!check_if_dead(philo) || philo->meals == philo->args->number_of_meals)
+	pthread_mutex_lock(&philo->args->mutex);
+	if (philo->args->died == 1)
 	{
-		pthread_mutex_unlock(&philo->args->print);
+		pthread_mutex_unlock(&philo->args->mutex);
 		return (0);
 	}
-	pthread_mutex_lock(&philo->args->check_print);
-	if (!philo->args->died)
+	printf("%lld %d %s\n", current_time(philo->args), philo->id, str);
+	pthread_mutex_unlock(&philo->args->mutex);
+	return (1);
+}
+
+int	print_2(t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->args->mutex);
+	if (philo->args->died == 1)
 	{
-		printf("%lld %i %s\n", current_time(philo->args), philo->id, str);
+		pthread_mutex_unlock(&philo->args->mutex);
+		return (0);
 	}
-	pthread_mutex_unlock(&philo->args->check_print);
+	printf("%lld %d %s\n", current_time(philo->args), philo->id, str);
+	philo->meals++;
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->args->mutex);
 	return (1);
 }

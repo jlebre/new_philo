@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-void    create_philo(t_args *args)
+void	create_philo(t_args *args)
 {
-	int 	i;
+	int		i;
 	t_philo	*philo;
 
 	philo = start_philo(args);
@@ -24,5 +24,8 @@ void    create_philo(t_args *args)
 		pthread_create(&philo[i].philo, NULL, &routine, &philo[i]);
 		i++;
 	}
-	destroy_philo(philo, args);
+	while (1)
+		if (!check_if_dead(philo))
+			break ;
+	destroy_philo(philo);
 }

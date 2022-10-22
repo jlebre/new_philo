@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void    ft_error(char	*str)
+void	ft_error(char	*str)
 {
 	red("Error!\n");
 	red(str);
